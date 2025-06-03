@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Hollow-Knight-Imitation.sln"
+    "dotnet.defaultSolution": "SanYuanJieXun.sln"
 }
