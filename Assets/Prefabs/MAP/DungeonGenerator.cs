@@ -11,10 +11,13 @@ public class DungeonGenerator : MonoBehaviour
 
     [Header("主角设置")]
     public Transform playerTransform;
+    public Transform birthplace;
+
 
     [Header("房间预制体")]
     public GameObject startRoom;
     public GameObject endRoom;
+    public GameObject shopRoom; // 新增商店房间预制体
     public List<GameObject> roomPrefabs = new List<GameObject>();
 
     [Header("补全房间预制体")]
@@ -24,7 +27,7 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject fillRight;
 
     private GameObject[,] roomGrid;
-    private enum RoomType { None, Start, End, Normal }
+    private enum RoomType { None, Start, End, Normal, Shop } // 新增Shop类型
     private class RoomData
     {
         public RoomType type;
@@ -35,6 +38,10 @@ public class DungeonGenerator : MonoBehaviour
 
     void Start()
     {
+        if (playerTransform == null)
+        {
+            playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
+        }
         GenerateDungeon();
         PositionPlayerAtStart();
     }
@@ -77,6 +84,9 @@ public class DungeonGenerator : MonoBehaviour
                 };
             }
         }
+
+        // 添加商店房间到主路的支线上
+        AddShopRoom(mainPath);
 
         int sideRooms = Random.Range(1, 3);
         int attempts = 0;
@@ -121,6 +131,75 @@ public class DungeonGenerator : MonoBehaviour
         Debug.Log("地图生成完成");
     }
 
+    // 修改后的AddShopRoom方法 - 直接放在主路中间的房间
+    private void AddShopRoom(List<Vector2Int> mainPath)
+    {
+        if (shopRoom == null)
+        {
+            Debug.LogWarning("未设置商店房间预制体！");
+            return;
+        }
+
+        // 确保主路径至少有3个房间（起点、终点和至少一个中间房间）
+        if (mainPath.Count < 3)
+        {
+            Debug.LogWarning("主路径太短，无法放置商店房间！");
+            return;
+        }
+
+        // 计算主路径中间位置（跳过起点和终点）
+        int middleIndex = mainPath.Count / 2;
+        Vector2Int shopPos = mainPath[middleIndex];
+
+        // 检查该位置是否已被占用（理论上不应该，因为主路径已经生成）
+        if (dungeonMap[shopPos.x, shopPos.y] != null &&
+            dungeonMap[shopPos.x, shopPos.y].type != RoomType.Normal)
+        {
+            // 如果中间位置不是普通房间，尝试找最近的普通房间
+            for (int i = 1; i <= mainPath.Count / 2; i++)
+            {
+                // 向前和向后搜索
+                int forwardIndex = middleIndex + i;
+                int backwardIndex = middleIndex - i;
+
+                if (forwardIndex < mainPath.Count - 1) // 跳过终点
+                {
+                    var forwardPos = mainPath[forwardIndex];
+                    if (dungeonMap[forwardPos.x, forwardPos.y].type == RoomType.Normal)
+                    {
+                        shopPos = forwardPos;
+                        break;
+                    }
+                }
+
+                if (backwardIndex > 0) // 跳过起点
+                {
+                    var backwardPos = mainPath[backwardIndex];
+                    if (dungeonMap[backwardPos.x, backwardPos.y].type == RoomType.Normal)
+                    {
+                        shopPos = backwardPos;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // 确保找到的位置是普通房间
+        if (dungeonMap[shopPos.x, shopPos.y].type == RoomType.Normal)
+        {
+            // 替换为商店房间
+            dungeonMap[shopPos.x, shopPos.y] = new RoomData
+            {
+                type = RoomType.Shop,
+                prefab = shopRoom
+            };
+        }
+        else
+        {
+            Debug.LogWarning("无法在主路径上找到合适位置放置商店房间！");
+        }
+    }
+
     private void FillVoidEdges()
     {
         for (int x = 0; x < gridSize; x++)
@@ -158,7 +237,6 @@ public class DungeonGenerator : MonoBehaviour
             return false;
         return dungeonMap[x, y] != null;
     }
-
 
     private List<Vector2Int> GeneratePath(Vector2Int start, Vector2Int end)
     {
@@ -221,7 +299,13 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    private void PositionPlayerAtStart()
+    public Transform Getbirthplace()
+    {
+        return birthplace;
+    }
+
+    //移动主角到复活点
+    public void PositionPlayerAtStart()
     {
         for (int x = 0; x < gridSize; x++)
         {
@@ -236,7 +320,7 @@ public class DungeonGenerator : MonoBehaviour
                         return;
                     }
 
-                    Transform birthplace = startRoomObj.transform.Find("birthplace");
+                    birthplace = startRoomObj.transform.Find("birthplace");
                     if (birthplace != null && playerTransform != null)
                     {
                         playerTransform.position = birthplace.position;
@@ -251,5 +335,31 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
         Debug.LogWarning("未找到 Start 房间！");
+    }
+    public void ResetDungeon()
+    {
+        // 销毁所有现有房间
+        if (mapParent != null)
+        {
+            foreach (Transform child in mapParent)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("mapParent未设置，无法正确销毁房间");
+        }
+
+        // 重置房间网格
+        roomGrid = new GameObject[gridSize, gridSize];
+
+        // 重新生成整个地牢
+        GenerateDungeon();
+
+        // 重新定位玩家到出生点
+        PositionPlayerAtStart();
+
+        Debug.Log("地牢已完全重置");
     }
 }

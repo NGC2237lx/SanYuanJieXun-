@@ -9,10 +9,11 @@ public class ProjectileDamage : MonoBehaviour
     [SerializeField] private int baseDamage = 1; // 基础伤害
     [SerializeField] private bool destroyOnHit = true; // 击中后是否销毁
 
+
     [Header("References")]
     [SerializeField] private CharacterController2D characterController; // 主角控制器
-    
 
+    [SerializeField] private AbilityManager abilityManager;
     private void Awake()
     {
         // 自动初始化敌人图层
@@ -23,6 +24,8 @@ public class ProjectileDamage : MonoBehaviour
         {
             characterController = FindObjectOfType<CharacterController2D>();
         }
+
+        abilityManager = FindObjectOfType<AbilityManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -35,12 +38,12 @@ public class ProjectileDamage : MonoBehaviour
         if (enemy != null)
         {
             // 计算最终伤害（基础伤害 + 主角slashDamage）
-            int finalDamage =  characterController.slashDamage;
+            int finalDamage = abilityManager.get_skil_scroll_attack();
             
             // 调用伤害方法
             enemy.Hurt(finalDamage);
             
-            Debug.Log($"造成伤害: {finalDamage} ");
+            Debug.Log($"符咒造成伤害: {finalDamage} ");
 
             // 击中后销毁
             if (destroyOnHit)

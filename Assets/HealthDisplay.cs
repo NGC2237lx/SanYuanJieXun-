@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class HealthDisplayTMP : MonoBehaviour
@@ -8,6 +9,8 @@ public class HealthDisplayTMP : MonoBehaviour
     [SerializeField] private CharacterData characterData;
     [SerializeField] private TextMeshProUGUI healthText;
     
+    [SerializeField] private Image healthBarImage; 
+
     [Header("Settings")]
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color lowColor = Color.red;
@@ -32,21 +35,17 @@ public class HealthDisplayTMP : MonoBehaviour
     {
         UpdateHealthDisplay();
     }
-    
+
     private void UpdateHealthDisplay()
     {
         if (characterData == null || healthText == null) return;
-        
+
         int currentHealth = characterData.GetCurrentHealth();
-        healthText.text = $"HP: {currentHealth}";
+        int maxHealth = characterData.GetMaxHealth();
+        healthText.text = $"{currentHealth}/{maxHealth}";
         
-        // 根据血量改变颜色
-        healthText.color = currentHealth <= lowHealthThreshold ? lowColor : normalColor;
-        
-        // 可选：添加闪烁效果当血量低时
-        if (currentHealth <= lowHealthThreshold)
-        {
-            healthText.color = Color.Lerp(lowColor, Color.yellow, Mathf.PingPong(Time.time, 1f));
-        }
+        float healthPercent = (float)currentHealth / maxHealth;
+        RectTransform rt = healthBarImage.rectTransform;
+        rt.sizeDelta = new Vector2(200 * healthPercent, rt.sizeDelta.y);
     }
 }

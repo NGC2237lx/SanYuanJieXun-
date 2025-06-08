@@ -62,6 +62,7 @@ public class CharacterController2D : MonoBehaviour
 
     [Header("其他参数")]
     [SerializeField] private bool firstLanding;
+    [SerializeField] private AbilityManager abilityManager;
 
     private int animatorFristLandingBool;
     private int animatorGroundedBool;
@@ -499,7 +500,11 @@ public class CharacterController2D : MonoBehaviour
             Breakable breakable = col.GetComponent<Breakable>();
             if (breakable != null)
             {
+                slashDamage = abilityManager.get_skil_sword_attack();
+                //breakable.Hurt(abilityManager.get_skil_sword_attack(), transform);
                 breakable.Hurt(slashDamage, transform);
+            
+                Debug.Log("挥剑伤害" + slashDamage);
             }
         }
     }

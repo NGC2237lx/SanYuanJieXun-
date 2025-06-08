@@ -4,8 +4,8 @@ public class CorpseInteractor : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private LayerMask enemyDetectorLayer;
-    [SerializeField] private int redeemValue = 10;    // 超度增加的善值
-    [SerializeField] private int consumeValue = -10; // 吞噬减少的善值
+    [SerializeField] private int redeemValue = 1;    // 超度增加的善值
+    [SerializeField] private int consumeValue = -1; // 吞噬减少的善值
     
     [Header("References")]
     [SerializeField] private MoralitySystem moralitySystem;
@@ -66,7 +66,7 @@ public class CorpseInteractor : MonoBehaviour
         if (moralitySystem != null)
         {
             moralitySystem.ChangeMorality(consumeValue);
-            Debug.Log($"吞噬尸体，善值{consumeValue}");
+            Debug.Log($"吞噬尸体，恶值{consumeValue}");
         }
         DestroyCorpse();
     }

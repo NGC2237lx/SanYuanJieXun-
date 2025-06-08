@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.UI;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -10,19 +11,31 @@ public class FireMoneyCollector : MonoBehaviour
     [SerializeField] Animator collectEffecter; // 收集时的动画效果
     [SerializeField] AudioClip[] fireMoneyCollects; // 收集音效数组
     [SerializeField] bool needToReset; // 是否需要重置计数
-    
+
     [Header("UI设置")]
     [SerializeField] TextMeshProUGUI fireMoneyText; // 显示FireMoney数量的TextMeshPro
-    
+    [SerializeField] Text fireMoneyText2; // 显示FireMoney数量
+
     private AudioSource audioSource;
     private int fireMoneyCount = 0;
     private int animationCollectTrigger = Animator.StringToHash("Collect");
 
+    private bool needtokaigua = true;
+
+    private void Kaigua()
+    {
+        PlayerPrefs.SetInt("FireMoney", 500);
+    }
+    public void ResetMoney()
+    {
+        fireMoneyCount = Mathf.RoundToInt(PlayerPrefs.GetInt("FireMoney") * 0.7f);
+        PlayerPrefs.SetInt("FireMoney", fireMoneyCount);
+        UpdateFireMoneyText();
+    }
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
     }
-
     private void Start()
     {
         // 如果需要重置，清空PlayerPrefs中的记录
@@ -31,7 +44,10 @@ public class FireMoneyCollector : MonoBehaviour
             PlayerPrefs.SetInt("FireMoney", 0);
             PlayerPrefs.Save();
         }
-        
+        if (needtokaigua)
+        {
+            Kaigua();
+        }
         // 从PlayerPrefs加载FireMoney数量
         fireMoneyCount = PlayerPrefs.GetInt("FireMoney");
         UpdateFireMoneyText();
@@ -44,17 +60,17 @@ public class FireMoneyCollector : MonoBehaviour
         {
             // 播放收集效果
             PlayCollectEffects();
-            
+
             // 增加FireMoney数量
             fireMoneyCount++;
-            
+
             // 保存到PlayerPrefs
             PlayerPrefs.SetInt("FireMoney", fireMoneyCount);
             PlayerPrefs.Save();
-            
+
             // 更新UI文本
             UpdateFireMoneyText();
-            
+
             // 销毁收集的FireMoney物体
             Destroy(collision.gameObject);
         }
@@ -67,7 +83,7 @@ public class FireMoneyCollector : MonoBehaviour
         {
             collectEffecter.SetTrigger(animationCollectTrigger);
         }
-        
+
         // 播放随机收集音效
         if (fireMoneyCollects.Length > 0)
         {
@@ -80,7 +96,11 @@ public class FireMoneyCollector : MonoBehaviour
     {
         if (fireMoneyText != null)
         {
-            fireMoneyText.SetText("FireMoney: "+fireMoneyCount.ToString());
+            fireMoneyText.SetText("FireMoney: " + fireMoneyCount.ToString());
+        }
+        if (fireMoneyText2 != null)
+        {
+            fireMoneyText2.text = fireMoneyCount.ToString();
         }
     }
 
@@ -92,10 +112,22 @@ public class FireMoneyCollector : MonoBehaviour
         PlayerPrefs.Save();
         UpdateFireMoneyText();
     }
-
+    public void ReduceFireMoney(int amount)//减少FireMoney数量
+    {
+        fireMoneyCount -= amount;
+        PlayerPrefs.SetInt("FireMoney", fireMoneyCount);
+        PlayerPrefs.Save();
+        UpdateFireMoneyText();
+    }
     // 获取当前FireMoney数量
     public int GetFireMoneyCount()
     {
         return fireMoneyCount;
+    }
+    
+    public void LoadFireMoneyCount()
+    {
+        fireMoneyCount = PlayerPrefs.GetInt("FireMoney");
+        UpdateFireMoneyText();
     }
 }
