@@ -51,3 +51,4 @@
 *.meta linguist-generated
 *.prefab linguist-generated
 *.unity linguist-generated
+Assets/Yahei[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
