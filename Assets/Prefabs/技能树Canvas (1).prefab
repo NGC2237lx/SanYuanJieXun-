@@ -231,8 +231,8 @@ MonoBehaviour:
   - {fileID: 3870431376113847669}
   displayPanel: {fileID: 8217906073671046808}
   upgradeButton: {fileID: 7454338170712999724}
+  notEnoughText: {fileID: 0}
   isLearned: 0
-  moneySystem: {fileID: 0}
 --- !u!1 &189274863587108804
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,8 +389,8 @@ MonoBehaviour:
   - {fileID: 9185840261083765600}
   displayPanel: {fileID: 8217906073671046808}
   upgradeButton: {fileID: 7454338170712999724}
+  notEnoughText: {fileID: 0}
   isLearned: 0
-  moneySystem: {fileID: 0}
 --- !u!1 &278353066403253029
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1177,8 +1177,8 @@ MonoBehaviour:
   - {fileID: 3870431376113847669}
   displayPanel: {fileID: 8217906073671046808}
   upgradeButton: {fileID: 7454338170712999724}
+  notEnoughText: {fileID: 0}
   isLearned: 0
-  moneySystem: {fileID: 0}
 --- !u!1 &858049914493690674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,8 +1800,8 @@ MonoBehaviour:
   - {fileID: 2116776290943375595}
   displayPanel: {fileID: 8217906073671046808}
   upgradeButton: {fileID: 7454338170712999724}
+  notEnoughText: {fileID: 0}
   isLearned: 0
-  moneySystem: {fileID: 0}
 --- !u!1 &1690700773231543824
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,7 +1860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2055,8 +2055,8 @@ MonoBehaviour:
   previousAbility: []
   displayPanel: {fileID: 8217906073671046808}
   upgradeButton: {fileID: 7454338170712999724}
+  notEnoughText: {fileID: 0}
   isLearned: 0
-  moneySystem: {fileID: 0}
 --- !u!114 &1264336161077857919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2431,7 +2431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2871,8 +2871,8 @@ MonoBehaviour:
   - {fileID: 4267481046984916155}
   displayPanel: {fileID: 8217906073671046808}
   upgradeButton: {fileID: 7454338170712999724}
+  notEnoughText: {fileID: 0}
   isLearned: 0
-  moneySystem: {fileID: 0}
 --- !u!1 &3024109875485884014
 GameObject:
   m_ObjectHideFlags: 0
@@ -3413,8 +3413,8 @@ MonoBehaviour:
   previousAbility: []
   displayPanel: {fileID: 8217906073671046808}
   upgradeButton: {fileID: 7454338170712999724}
+  notEnoughText: {fileID: 0}
   isLearned: 0
-  moneySystem: {fileID: 0}
 --- !u!1 &4648355655216901458
 GameObject:
   m_ObjectHideFlags: 0
@@ -3644,7 +3644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3719,7 +3719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4042,7 +4042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4292,8 +4292,8 @@ MonoBehaviour:
   - {fileID: 6779550679590666631}
   displayPanel: {fileID: 8217906073671046808}
   upgradeButton: {fileID: 7454338170712999724}
+  notEnoughText: {fileID: 0}
   isLearned: 0
-  moneySystem: {fileID: 0}
 --- !u!1 &6724215196265584559
 GameObject:
   m_ObjectHideFlags: 0
@@ -4352,7 +4352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4525,8 +4525,8 @@ MonoBehaviour:
   - {fileID: 9185840261083765600}
   displayPanel: {fileID: 8217906073671046808}
   upgradeButton: {fileID: 7454338170712999724}
+  notEnoughText: {fileID: 0}
   isLearned: 0
-  moneySystem: {fileID: 0}
 --- !u!1 &6905079587754430097
 GameObject:
   m_ObjectHideFlags: 0
@@ -4680,7 +4680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4755,7 +4755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4867,7 +4867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6158526550575918366
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5179,6 +5179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 318c8da8299eea64aa6a8005066c576b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moralitySystem: {fileID: 0}
   allAbilities:
   - {fileID: 9185840261083765600}
   - {fileID: 1513239258965344847}
@@ -6038,8 +6039,8 @@ MonoBehaviour:
   - {fileID: 1513239258965344847}
   displayPanel: {fileID: 8217906073671046808}
   upgradeButton: {fileID: 7454338170712999724}
+  notEnoughText: {fileID: 0}
   isLearned: 0
-  moneySystem: {fileID: 0}
 --- !u!1 &9191931511247077697
 GameObject:
   m_ObjectHideFlags: 0

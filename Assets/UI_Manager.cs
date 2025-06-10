@@ -1,61 +1,58 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
 {
-    [Header("界面配置")]
-    [SerializeField] private GameObject skillTreePanel;  // 技能树界面
-    [SerializeField] private GameObject[] otherPanels;   // 需要被隐藏的其他界面（如主菜单、背包等）
-
-    [Header("按钮配置")]
-    [SerializeField] private Button enterButton;  // 进入技能树的按钮
-    [SerializeField] private Button backButton;    // 返回按钮
+    // UI元素名称常量
+    private const string SKILL_TREE_PANEL = "SkillTreeCanvas";
+    private const string ENTER_BUTTON = "EnterButton";
+    private const string BACK_BUTTON = "BackButton";
+    
+    // 自动查找的UI元素
+    private GameObject skillTreePanel;
+    private Button enterButton;
+    private Button backButton;
 
     private void Start()
     {
+        // 自动查找UI元素
+        skillTreePanel = GameObject.Find(SKILL_TREE_PANEL);
+        enterButton = GameObject.Find(ENTER_BUTTON)?.GetComponent<Button>();
+        backButton = GameObject.Find(BACK_BUTTON)?.GetComponent<Button>();
+
+        // 验证查找结果
+        if (skillTreePanel == null) Debug.LogError($"找不到技能树面板: {SKILL_TREE_PANEL}");
+        if (enterButton == null) Debug.LogError($"找不到进入按钮: {ENTER_BUTTON}");
+        if (backButton == null) Debug.LogError($"找不到返回按钮: {BACK_BUTTON}");
+
         // 绑定按钮事件
-        enterButton.onClick.AddListener(ShowSkillTree);
-        backButton.onClick.AddListener(HideSkillTree);
+        if (enterButton != null) enterButton.onClick.AddListener(ShowSkillTree);
+        if (backButton != null) backButton.onClick.AddListener(HideSkillTree);
         
-        // 初始化状态
-        skillTreePanel.SetActive(false);
+        // 初始隐藏技能树
+        if (skillTreePanel != null) skillTreePanel.SetActive(false);
     }
 
-    /// <summary>
-    /// 显示技能树界面并隐藏其他界面
-    /// </summary>
+    /// 显示技能树界面
     private void ShowSkillTree()
     {
-        // 隐藏所有其他界面
-        foreach (var panel in otherPanels)
+        if (skillTreePanel != null)
         {
-            if (panel != null) panel.SetActive(false);
+            skillTreePanel.SetActive(true);
+            AbilityManager.Instance?.SetAllButtonActiveFalse(); // 刷新技能按钮状态
         }
-        
-        // 显示技能树
-        skillTreePanel.SetActive(true);
     }
 
-    /// <summary>
-    /// 隐藏技能树界面并显示其他界面
-    /// </summary>
+    /// 隐藏技能树界面
     private void HideSkillTree()
     {
-        // 隐藏技能树
-        skillTreePanel.SetActive(false);
-        
-        // 显示其他界面（默认显示第一个）
-        if (otherPanels.Length > 0 && otherPanels[0] != null)
-        {
-            otherPanels[0].SetActive(true); 
-        }
+        if (skillTreePanel != null) skillTreePanel.SetActive(false);
     }
 
     private void OnDestroy()
     {
-        // 移除按钮监听（防止内存泄漏）
-        enterButton.onClick.RemoveListener(ShowSkillTree);
-        backButton.onClick.RemoveListener(HideSkillTree);
+        // 安全移除事件监听
+        if (enterButton != null) enterButton.onClick.RemoveListener(ShowSkillTree);
+        if (backButton != null) backButton.onClick.RemoveListener(HideSkillTree);
     }
 }

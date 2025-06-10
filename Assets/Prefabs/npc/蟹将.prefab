@@ -1,0 +1,175 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8501880817823586781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7888376821729596929}
+  - component: {fileID: 1181102403497292944}
+  - component: {fileID: 4485622992252295007}
+  - component: {fileID: 56443479512470822}
+  m_Layer: 0
+  m_Name: "\u87F9\u5C06"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7888376821729596929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8501880817823586781}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 29.22, y: 7.79, z: 0}
+  m_LocalScale: {x: 0.62656534, y: 0.61391145, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!212 &1181102403497292944
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8501880817823586781}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 449d09f990dcf9d49957a2178e16928b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 6.27, y: 6.8}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!61 &4485622992252295007
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8501880817823586781}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.10550308, y: 0.5486162}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.64, y: 4.82}
+    newSize: {x: 6.27, y: 6.8}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.981886, y: 7.4372325}
+  m_EdgeRadius: 0
+--- !u!114 &56443479512470822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8501880817823586781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4990c3b388c932f429e74b875c762c98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasName: DialogueCanvas
+  npcPortraitName: NPC_Portrait
+  playerPortraitName: Player_Portrait
+  dialogueTextName: Dialogue_Text
+  dialogueLines:
+  - "\u201C\u7AD9\u4F4F\uFF01\u524D\u65B9\u662F\u8840\u5BAB\u4E4B\u57DF\uFF0C\u51E1\u4F53\u8005\u4E0D\u5F97\u9760\u8FD1\uFF01\u201D"
+  - "\u201C\u6211\u4E0D\u662F\u51E1\u4EBA\u3002\u201D"
+  - "\u201C\u4F60\u8FD9\u6C14\u606F\u2026\u2026\u50CF\u795E\uFF0C\u53C8\u50CF\u2026\u2026\u5C38\u3002\u201D"
+  - "\u201C\u4F60\u80FD\u611F\u89C9\u5230\uFF1F\u201D"
+  - "\u201C\u5728\u8FD9\u9F99\u6E0A\u767E\u5E74\uFF0C\u6211\u5206\u5F97\u6E05\u6C34\u7684\u54B8\u3001\u8840\u7684\u8165\uFF0C\u4E5F\u8BA4\u5F97\u4E09\u5B98\u771F\u8EAB\u7684\u5473\u9053\u3002\u201D"
+  - "\u201C\u4F60\u66FE\u662F\u6C34\u5B98\u5EA7\u4E0B\uFF1F\u201D"
+  - "\u201C\u87F9\u5C06\u7384\u65A7\uFF0C\u8A93\u5B88\u9F99\u6E0A\u3002\u53EF\u6211\u4E3B\u2026\u2026\u65E9\u5DF2\u975E\u6614\u65E5\u6C34\u5B98\u3002\u201D"
+  - "\u201C\u4ED6\u505A\u4E86\u4EC0\u4E48\uFF1F\u201D"
+  - "\u201C\u4ED6\u542C\u4E86\u2018\u75F4\u2019\u7684\u4F4E\u8BED\u2014\u2014\u2018\u4F17\u751F\u53EF\u6551\uFF0C\u552F\u6C34\u4E0D\u51C0\u2019\u3002\u201D"
+  - "\u201C\u6C34\u5B98\u2026\u2026\u5815\u5165\u7EDD\u671B\uFF1F\u201D"
+  - "\u201C\u4ED6\u5C1D\u8BD5\u51C0\u5C3D\u6C61\u79FD\uFF0C\u8FDE\u540C\u51E1\u4EBA\u4E00\u5E76\u5377\u5165\u6D2A\u6F6E\uFF0C\u8840\u6D41\u4E09\u754C\u3002\u201D"
+  - "\u201C\u6240\u4EE5\u4F60\u7559\u5728\u8FD9\uFF1F\u201D"
+  - "\u201C\u6211\u4E0D\u613F\u80CC\u53DB\u65E7\u4E3B\uFF0C\u4E5F\u4E0D\u613F\u968F\u4ED6\u6C89\u6CA6\u3002\u6211\u5728\u6B64\u6321\u8DEF\u767E\u5E74\u2026\u2026\u53EA\u4E3A\u7B49\u4E00\u4E2A\u80FD\u8FDB\u5F97\u53BB\u3001\u80FD\u8D70\u5F97\u51FA\u7684\u4EBA\u3002\u201D"
+  - "\u201C\u4F60\u5728\u7B49\u6211\uFF1F\u201D"
+  - "\u201C\u4F60\u6765\u5F97\u592A\u665A\uFF0C\u6C34\u5BAB\u5FEB\u574D\u4E86\uFF0C\u6211\u5FEB\u6491\u4E0D\u4F4F\u4E86\u3002\u4F46\u4F60\u2026\u2026\u4F60\u4E5F\u8BB8\u662F\u2018\u4ED6\u2019\u9057\u5FD8\u7684\u90A3\u90E8\u5206\u3002\u201D"
+  - "\u201C\u4ED6\u8FD8\u8BB0\u5F97\u6211\uFF1F\u201D"
+  - "\u201C\u4E5F\u8BB8\u4E0D\u8BB0\u5F97\u4E86\u3002\u4F46\u4ED6\u8EB2\u7740\u7684\uFF0C\u4E0D\u662F\u522B\u4EBA\uFF0C\u662F\u81EA\u5DF1\u3002\u201D"
+  - "\u201C\u6211\u518D\u95EE\u4E00\u6B21\uFF0C\u4F60\u8FDB\u9F99\u6E0A\uFF0C\u662F\u4E3A\u51C0\u6C34\u3001\u4E3A\u590D\u4EC7\uFF0C\u8FD8\u662F\u4E3A\u6551\u795E\uFF1F\u201D"
+  - "\u201C\u4E3A\u9009\u62E9\u3002\u201D"
+  - "\u201C\u2026\u2026\u597D\u3002\u7384\u65A7\u8BA9\u9053\u3002\u4F60\u8FDB\u53BB\uFF0C\u6211\u66FF\u4F60\u6321\u6700\u540E\u4E00\u6CE2\u6F6E\u6C50\u3002\u201D"
+  - "\u201C\u4F60\u4F1A\u6B7B\uFF1F\u201D"
+  - "\u201C\u6211\u65E9\u5C31\u6B7B\u4E86\uFF0C\u73B0\u5728\u6D3B\u7740\u7684\uFF0C\u53EA\u662F\u4E00\u6BB5\u5B88\u8A93\u7684\u6267\u5FF5\u3002\u201D"
+  - "\u201C\u8C22\u8C22\u3002\u201D"
+  - "\u201C\u522B\u8C22\u6211\uFF0C\u82E5\u4F60\u89C1\u5230\u8840\u6CB3\u9F99\u541B\uFF0C\u8BB0\u5F97\u63D0\u9192\u4ED6\uFF1A\u2018\u7384\u65A7\uFF0C\u4ECE\u672A\u5931\u624B\u3002\u2019\u201D"
+  - "\uFF08\u575A\u5B9A\u70B9\u5934\uFF09"

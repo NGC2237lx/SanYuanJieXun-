@@ -7,15 +7,28 @@ public class AbilityManager : MonoBehaviour
     public static AbilityManager Instance;
 
     [Header("所有技能")]
-
     [SerializeField] private MoralitySystem moralitySystem;
     public List<Ability> allAbilities = new List<Ability>();
     
+    // 技能名称常量
+    private const string SWORD = "00_Sword";
+    private const string SCROLL = "01_Scroll";
+    private const string FIRE = "02_Fire";
+    private const string THUNDER = "03_Thunder";
+    private const string STEPS = "04_Steps";
+    private const string QI_BLOOD = "05_Qi-Blood";
+    private const string BIG_BOOK = "06_BigBook";
+    private const string BIG_SWORD = "07_BigSword";
+    private const string BLOOD_SWORD = "08_BloodSword";
+    private const string WATER_PROOF = "09_WaterProof";
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+        
+        // 自动查找并填充所有技能
+        FindAllAbilities();
     }
 
     void Start()
@@ -26,6 +39,7 @@ public class AbilityManager : MonoBehaviour
                 DarkenAbilityImage(ability.gameObject); // 未学习：变暗
         }
     }
+
     private void Update()
     {
         foreach (Ability ability in allAbilities)
@@ -35,7 +49,31 @@ public class AbilityManager : MonoBehaviour
         }
     }
 
-        // 保存所有技能状态
+    // 自动查找所有技能
+    private void FindAllAbilities()
+    {
+        // 清空现有列表
+        allAbilities.Clear();
+        
+        // 查找所有Ability对象
+        Ability[] foundAbilities = Resources.FindObjectsOfTypeAll<Ability>();
+        
+        // 按名称排序并添加到列表
+        foreach (string abilityName in new string[] {SWORD, SCROLL, FIRE, THUNDER, STEPS, 
+                    QI_BLOOD, BIG_BOOK, BIG_SWORD, BLOOD_SWORD, WATER_PROOF})
+        {
+            foreach (Ability ability in foundAbilities)
+            {
+                if (ability.name == abilityName)
+                {
+                    allAbilities.Add(ability);
+                    break;
+                }
+            }
+        }
+    }
+
+    // 保存所有技能状态
     public void SaveAbilities()
     {
         foreach (Ability ability in allAbilities)
@@ -67,40 +105,38 @@ public class AbilityManager : MonoBehaviour
         int swordAttack = 1;
         foreach (Ability ability in allAbilities)
         {
-            if (ability.name == "02_Fire" || ability.name == "03_Thunder" || ability.name == "07_BigSword" || ability.name == "08_BloodSword")
+            if (ability.name == FIRE || ability.name == THUNDER || 
+                ability.name == BIG_SWORD || ability.name == BLOOD_SWORD)
             {
-
-
                 if (ability.isLearned)
                 {
-                    if (ability.name == "03_Thunder" || ability.name == "02_Fire")
+                    if (ability.name == THUNDER || ability.name == FIRE)
                     {
                         swordAttack += 1;
                     }
-                    else if (ability.name == "07_BigSword")
+                    else if (ability.name == BIG_SWORD)
                         swordAttack += 5;
-                    else if (ability.name == "08_BloodSword")
+                    else if (ability.name == BLOOD_SWORD)
                         swordAttack += 10;
                 }
             }
         }
         return swordAttack + moralitySystem.get_MaxMorality_attack();
     }
+    
     public int get_skil_scroll_attack()
     {
         int scrollAttack = 1;
         foreach (Ability ability in allAbilities)
         {
-            if (ability.name == "06_BigBook")
+            if (ability.name == BIG_BOOK && ability.isLearned)
             {
-                if (ability.isLearned)
-                {
-                    scrollAttack += 1;
-                }
+                scrollAttack += 1;
             }
         }
-        return scrollAttack+moralitySystem.get_MaxMorality_attack();
+        return scrollAttack + moralitySystem.get_MaxMorality_attack();
     }
+    
     public void SetAllButtonActiveFalse()
     {
         foreach (Ability ability in allAbilities)
@@ -120,7 +156,6 @@ public class AbilityManager : MonoBehaviour
             Image abilityImage = abilityImageTransform.GetComponent<Image>();
             if (abilityImage != null)
             {
-                // 恢复为白色（原始颜色）
                 abilityImage.color = Color.white;
             }
             else
@@ -144,11 +179,11 @@ public class AbilityManager : MonoBehaviour
             if (abilityImage != null)
             {
                 Color currentColor = abilityImage.color;
-                //print(currentColor.r + " " + currentColor.g + " " + currentColor.b);
+                print(currentColor.r+ " " + currentColor.g + " " + currentColor.b);
                 Color darkenedColor = new Color(
-                    Mathf.Max(0, currentColor.r-0.7f),
-                    Mathf.Max(0, currentColor.g-0.7f),
-                    Mathf.Max(0, currentColor.b-0.7f),
+                    Mathf.Max(0.3f, currentColor.r-0.5f),
+                    Mathf.Max(0.3f, currentColor.g-0.5f),
+                    Mathf.Max(0.3f, currentColor.b-0.5f),
                     currentColor.a
                 );
                 abilityImage.color = darkenedColor;

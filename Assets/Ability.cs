@@ -15,18 +15,27 @@ public class Ability : MonoBehaviour
     public Ability[] previousAbility; // 前置技能
 
     [Header("UI引用")]
-    public DisplayPanel displayPanel;
+    public DisplayPanel displayPanel; // 保持手动拖入
     public Button upgradeButton; // 独立的升级按钮
     public GameObject notEnoughText; // 香火钱不足提示文本
 
     [Header("状态")]
     public bool isLearned;
-    public FireMoneyCollector moneySystem;
 
-    public AbilityManager abilityManager;
+    // 自动查找的组件
+    private FireMoneyCollector moneySystem;
+    private AbilityManager abilityManager;
 
     private void Start()
     {
+        // 自动查找关键组件
+        moneySystem = FindObjectOfType<FireMoneyCollector>();
+        abilityManager = FindObjectOfType<AbilityManager>();
+
+        // 验证组件
+        if (moneySystem == null) Debug.LogError("找不到FireMoneyCollector组件！");
+        if (abilityManager == null) Debug.LogError("找不到AbilityManager组件！");
+
         // 绑定查看技能按钮
         GetComponent<Button>().onClick.AddListener(ShowAbilityInfo);
 
@@ -47,9 +56,15 @@ public class Ability : MonoBehaviour
     // 显示技能信息（无论是否学习）
     public void ShowAbilityInfo()
     {
-        abilityManager.SetAllButtonActiveFalse();
+        if (abilityManager != null)
+        {
+            abilityManager.SetAllButtonActiveFalse();
+        }
 
-        if(IsUnlockable() && !isLearned) upgradeButton.gameObject.SetActive(true);
+        if(IsUnlockable() && !isLearned && upgradeButton != null) 
+        {
+            upgradeButton.gameObject.SetActive(true);
+        }
 
         if (displayPanel != null)
         {
@@ -67,7 +82,10 @@ public class Ability : MonoBehaviour
         {
             moneySystem.ReduceFireMoney(upgradeCost);
             LearnAbility();
-            upgradeButton.gameObject.SetActive(false);
+            if (upgradeButton != null)
+            {
+                upgradeButton.gameObject.SetActive(false);
+            }
         }
         else
         {
@@ -92,7 +110,10 @@ public class Ability : MonoBehaviour
     private IEnumerator HideNotEnoughTextAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        notEnoughText.SetActive(false);
+        if (notEnoughText != null)
+        {
+            notEnoughText.SetActive(false);
+        }
     }
 
     // 学习技能
@@ -101,7 +122,10 @@ public class Ability : MonoBehaviour
         if (name == "05_Qi-Blood")
         {
             CharacterData cd = FindObjectOfType<CharacterData>();
-            cd.SetMaxHealth(10);
+            if (cd != null)
+            {
+                cd.SetMaxHealth(10);
+            }
         }
         Debug.Log($"学习技能: {abilityName} (对象: {gameObject.name})");
         isLearned = true;

@@ -36,10 +36,10 @@ EditorBuildSettings:
     path: Assets/Scenes/LTS/Opening Sequence No Game.unity
     guid: ae62827489e562f45b93b1cc371335c7
   - enabled: 1
-    path: Assets/Scenes/LTS/Boss1.unity
+    path: "Assets/Scenes/LTS/\u5B8C\u6574\u5173\u5361/Boss1.unity"
     guid: c140622824562814ca8d9d391f4140e3
   - enabled: 1
-    path: "Assets/Scenes/LTS/\u5173\u53611.unity"
+    path: "Assets/Scenes/LTS/\u5B8C\u6574\u5173\u5361/\u5173\u53611.unity"
     guid: 9c19914d0d5e6f748892dfa235e211fd
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: a42204f0175303740900e8367005bf5e,
