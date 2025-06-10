@@ -2828,7 +2828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2cdbd0b36785d4aa50ceed497c7951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetScene: Boss1
+  targetScene: Boss2
   requireSaveBeforeTeleport: 1
   saveDelay: 0.5
 --- !u!58 &5928968114249820839

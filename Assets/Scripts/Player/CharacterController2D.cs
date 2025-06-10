@@ -19,6 +19,7 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] CharacterData data = null;
     [SerializeField] AudioSource audioMusicPlayer = null;
     [SerializeField] GameManager gameManager = null;
+    [SerializeField]  AbilityManager abilityManager = null;
 
     [Header("移动参数")]
     [SerializeField] float maxSpeed = 0.0f;
@@ -62,7 +63,7 @@ public class CharacterController2D : MonoBehaviour
 
     [Header("其他参数")]
     [SerializeField] private bool firstLanding;
-    [SerializeField] private AbilityManager abilityManager;
+
 
     private int animatorFristLandingBool;
     private int animatorGroundedBool;
@@ -108,6 +109,13 @@ public class CharacterController2D : MonoBehaviour
         controllerRigidbody = GetComponent<Rigidbody2D>();
         gameManager = FindObjectOfType<GameManager>();
         data = GetComponent<CharacterData>();
+
+         // 自动查找AbilityManager
+        abilityManager = FindObjectOfType<AbilityManager>();
+        if (abilityManager == null)
+        {
+            Debug.LogError("找不到AbilityManager组件！");
+        }
 
         animatorGroundedBool = Animator.StringToHash("Grounded");
         animatorSlidingBool = Animator.StringToHash("Sliding");

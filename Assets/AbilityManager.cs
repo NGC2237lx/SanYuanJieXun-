@@ -27,6 +27,12 @@ public class AbilityManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
         
+        moralitySystem = FindObjectOfType<MoralitySystem>();
+        if (moralitySystem == null)
+        {
+            Debug.LogError("找不到MoralitySystem组件！");
+        }
+        
         // 自动查找并填充所有技能
         FindAllAbilities();
     }
