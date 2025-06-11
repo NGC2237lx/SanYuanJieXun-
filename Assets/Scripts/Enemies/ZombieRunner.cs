@@ -34,10 +34,15 @@ public class ZombieRunner : Enemy
         rb = GetComponent<Rigidbody2D>();
         hit = GetComponentInChildren<HitEffect>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+           
     }
 
     private void Update()
     {
+         // 直接通过名字查找场景中的物体
+        groundCheck = GameObject.Find("GroundCheck").transform;
+        wallCheck = GameObject.Find("WallCheck").transform;
         if (isDead)
             return;
         CheckIsDead();

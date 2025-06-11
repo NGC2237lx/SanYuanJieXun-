@@ -120,7 +120,7 @@ public class CharacterData : MonoBehaviour
         animator.SetTrigger("Respawn");
 
         // 等待重生动画播放
-        //yield return new WaitForSeconds(1f); // 根据实际动画长度调整
+        yield return new WaitForSeconds(0.1f); // 根据实际动画长度调整
 
         // 实际重生逻辑
         CompleteRespawn();
@@ -131,13 +131,27 @@ public class CharacterData : MonoBehaviour
     {
         if (!isTemple)
         {
-            DungeonGenerator dg = FindObjectOfType<DungeonGenerator>();
-            //重置地牢
-            dg.ResetDungeon();
-            // 重置位置
-            Transform birthplace = dg.Getbirthplace();
-            //调整这个脚本挂载到的对象的位置
-            transform.position = new Vector3(birthplace.position.x, birthplace.position.y, transform.position.z);
+            // 检查当前场景是否是Boss房间
+            BoosRoomSet bossRoom = FindObjectOfType<BoosRoomSet>();
+            if (bossRoom != null)
+            {
+                // 如果是Boss房间，调用Set_birth_place函数
+                bossRoom.Set_birth_place();
+                // // 获取重生位置
+                // Transform birthplace = bossRoom.Set_birth_place(); // 假设BossRoomSet有这个方法
+                // transform.position = new Vector3(birthplace.position.x, birthplace.position.y, transform.position.z);
+            }
+            else
+            {
+                // 如果不是Boss房间，正常重置地牢
+                DungeonGenerator dg = FindObjectOfType<DungeonGenerator>();
+                //重置地牢
+                dg.ResetDungeon();
+                // 重置位置
+                Transform birthplace = dg.Getbirthplace();
+                //调整这个脚本挂载到的对象的位置
+                transform.position = new Vector3(birthplace.position.x, birthplace.position.y, transform.position.z);
+            }
         }
         else
         {
@@ -146,7 +160,6 @@ public class CharacterData : MonoBehaviour
 
         // 恢复生命值
         health = maxHealth;
-
 
         // 扣钱 
         fc.ResetMoney();
@@ -158,7 +171,7 @@ public class CharacterData : MonoBehaviour
 
         // 恢复物理碰撞
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Hero Detector"),
-                                     LayerMask.NameToLayer("Enemy Detector"), false);
+                                    LayerMask.NameToLayer("Enemy Detector"), false);
 
         Debug.Log("角色已重生");
     }

@@ -10,6 +10,10 @@ public class BoosRoomSet : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        Set_birth_place();    
+    }
+    public void Set_birth_place()
+    {
         player.transform.position = bossRoomEntrance.position; // 将玩家传送到Boss房间
     }
 }

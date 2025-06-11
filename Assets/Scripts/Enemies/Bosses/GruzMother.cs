@@ -168,8 +168,8 @@ public class GruzMother : Enemy
 
     private void ExitSleepState()
     {
-        LockGates();
-        GetComponent<TextReminderTrigger>().DisplayText();
+        //LockGates();
+        //GetComponent<TextReminderTrigger>().DisplayText();
         snore.Stop();
         snoreAudio.Stop();
         GetComponent<Collider2D>().isTrigger = false;
@@ -440,17 +440,17 @@ public class GruzMother : Enemy
         rb.AddForce(Vector2.up * deathUpForce);
     }
 
-    public void LockGates()
-    {
-        leftBattleGate.Lock();
-        rightBattleGate.Lock();
-    }
+    // public void LockGates()
+    // {
+    //     leftBattleGate.Lock();
+    //     rightBattleGate.Lock();
+    // }
 
-    public void UnlockGates()
-    {
-        leftBattleGate.Unlock();
-        rightBattleGate.Unlock();
-    }
+    // public void UnlockGates()
+    // {
+    //     leftBattleGate.Unlock();
+    //     rightBattleGate.Unlock();
+    // }
 
     public void PlayGushingEffect()
     {
