@@ -275,7 +275,11 @@ public class DragonBehavior : Enemy
             if (currentState != DragonState.Attack)
             {
                 currentState = DragonState.Attack;
-                HandleAttackState();
+                animator.SetFloat("Speed", 0);
+                animator.SetBool("Idle", false);
+                animator.SetBool("Patrol", false);
+                animator.SetBool("Chasing", false);
+
             }
             return; // 直接返回，不检查其他状态
         }
@@ -286,6 +290,9 @@ public class DragonBehavior : Enemy
             if (currentState != DragonState.Chase)
             {
                 currentState = DragonState.Chase;
+                animator.SetFloat("Speed", chaseSpeed);
+                animator.SetBool("Idle", false);
+                animator.SetBool("Patrol", false);
                 animator.SetBool("Chasing", true);
             }
             return; // 直接返回
@@ -297,8 +304,10 @@ public class DragonBehavior : Enemy
             if (currentState != DragonState.Patrol)
             {
                 currentState = DragonState.Patrol;
+                animator.SetFloat("Speed", patrolSpeed);
+                animator.SetBool("Idle", false);
+                animator.SetBool("Patrol", true);
                 animator.SetBool("Chasing", false);
-                stateTimer = Random.Range(minPatrolTime, maxPatrolTime);
             }
             return; // 直接返回
         }
@@ -307,9 +316,12 @@ public class DragonBehavior : Enemy
         if (currentState != DragonState.Idle)
         {
             currentState = DragonState.Idle;
+            animator.SetFloat("Speed", 0);
+            animator.SetBool("Idle", true);
+            animator.SetBool("Patrol", false);
             animator.SetBool("Chasing", false);
-            stateTimer = Random.Range(minIdleTime, maxIdleTime);
         }
+        HandleStateBehavior();
     }
 
     void HandleStateBehavior()
@@ -336,32 +348,14 @@ public class DragonBehavior : Enemy
 
     void HandleIdleState()
     {
-        // 减少状态计时器
-        stateTimer -= Time.deltaTime;
 
         // 确保在空闲状态下保持静止
         rb.velocity = new Vector2(0, rb.velocity.y);
-        animator.SetFloat("Speed", 0);
-
-        // 当空闲时间结束，保持空闲状态
-        // 不需要自动转到巡逻，由UpdateState处理
+        
     }
 
     void HandlePatrolState()
     {
-        // 状态计时器
-        stateTimer -= Time.deltaTime;
-
-        // 定时状态转换
-        if (stateTimer <= 0)
-        {
-            // 切换到空闲状态
-            currentState = DragonState.Idle;
-            animator.SetBool("Chasing", false);
-            stateTimer = Random.Range(minIdleTime, maxIdleTime);
-            return;
-        }
-
         // 检测前方障碍
         bool shouldTurn = false;
 
@@ -385,9 +379,6 @@ public class DragonBehavior : Enemy
             TurnAround();
             stateTimer += 1.0f; // 给一些额外巡逻时间
         }
-
-        // 移动逻辑 - 朝玩家方向巡逻
-        animator.SetFloat("Speed", patrolSpeed);
         Vector2 directionToPlayer = (player.position - transform.position).normalized;
         Vector2 moveDirection = Vector2.right * Mathf.Sign(directionToPlayer.x);
         transform.Translate(moveDirection * patrolSpeed * Time.deltaTime);
@@ -397,7 +388,7 @@ public class DragonBehavior : Enemy
         if (moveDirection.x > 0 && transform.localScale.x < 0)
             transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         else if (moveDirection.x < 0 && transform.localScale.x > 0)
-            transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            transform.localScale = new Vector3(-1.5f, 1.5f, 1.5f);
     }
 
     void HandleChaseState()
@@ -414,18 +405,17 @@ public class DragonBehavior : Enemy
         // 追踪玩家
         Vector2 direction = (player.position - transform.position).normalized;
         transform.Translate(direction * chaseSpeed * Time.deltaTime);
-        animator.SetFloat("Speed", chaseSpeed);
 
         // 面向玩家
         if (direction.x > 0 && transform.localScale.x < 0)
             transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         else if (direction.x < 0 && transform.localScale.x > 0)
-            transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            transform.localScale = new Vector3(-1.5f, 1.5f, 1.5f);
     }
 
     void HandleAttackState()
     {
-        Debug.Log("进入攻击范围");
+        //Debug.Log("进入攻击范围");
         // 停止移动并面向玩家
         rb.velocity = new Vector2(0, rb.velocity.y);
         animator.SetFloat("Speed", 0);
@@ -434,7 +424,7 @@ public class DragonBehavior : Enemy
         if (direction.x > 0 && transform.localScale.x < 0)
             transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         else if (direction.x < 0 && transform.localScale.x > 0)
-            transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            transform.localScale = new Vector3(-1.5f, 1.5f, 1.5f);
 
         //在发射火球的冷却期过去后才可以发射
         if (canAttack) { 
