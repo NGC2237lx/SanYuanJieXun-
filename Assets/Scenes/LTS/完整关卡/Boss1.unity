@@ -20894,8 +20894,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 5/10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -34711,40 +34711,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1441870550879569937, guid: bc2d4e31e006aef4598849ba66a20d06,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 0.3853001
-      objectReference: {fileID: 0}
-    - target: {fileID: 1441870550879569937, guid: bc2d4e31e006aef4598849ba66a20d06,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.29353356
-      objectReference: {fileID: 0}
-    - target: {fileID: 1441870550879569937, guid: bc2d4e31e006aef4598849ba66a20d06,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: 0.027844466
-      objectReference: {fileID: 0}
-    - target: {fileID: 1441870550879569937, guid: bc2d4e31e006aef4598849ba66a20d06,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.0017667711
-      objectReference: {fileID: 0}
     - target: {fileID: 3362196762610571039, guid: bc2d4e31e006aef4598849ba66a20d06,
         type: 3}
       propertyPath: m_Name
       value: Flying eye
-      objectReference: {fileID: 0}
-    - target: {fileID: 6329279488667017867, guid: bc2d4e31e006aef4598849ba66a20d06,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 6329279488667017867, guid: bc2d4e31e006aef4598849ba66a20d06,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6329279488667017867, guid: bc2d4e31e006aef4598849ba66a20d06,
         type: 3}
