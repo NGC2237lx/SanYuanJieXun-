@@ -15,7 +15,7 @@ public class Skeleton : Enemy // 确保继承自 Enemy
     [SerializeField] float wallCheckDistance = 0.5f; // 墙壁检测距离
 
     [Header("Player Detection & Attack")]
-    [SerializeField] private GameObject player; // 玩家对象 (可以直接从FindGameObjectWithTag获取)
+    [SerializeField] public GameObject player; // 玩家对象 (可以直接从FindGameObjectWithTag获取)
     [SerializeField] float attackRange = 2f; // 触发普通攻击的距离
     [SerializeField] float comboRange = 3f; // 触发组合攻击的距离
     [SerializeField] private Transform attackPoint; // 攻击伤害检测的中心点 (子对象Transform)
@@ -41,7 +41,7 @@ public class Skeleton : Enemy // 确保继承自 Enemy
     private bool isComboing = false; // 是否正在进行组合攻击 (由动画事件和状态机控制)
     private bool groundDetected; // 地面检测结果
     private bool wallDetected; // 墙壁检测结果
-    private bool playerDetectedInTrigger = false; // 用于OnTriggerEnter/Exit检测玩家
+    public bool playerDetectedInTrigger = false; // 用于OnTriggerEnter/Exit检测玩家
 
     public enum EnemyState
     {
@@ -147,26 +147,7 @@ public class Skeleton : Enemy // 确保继承自 Enemy
             rb.velocity = Vector2.zero;
         }
     }
-
-    // 当其他2D碰撞体进入此触发器时调用 (用于检测玩家进入范围)
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            playerDetectedInTrigger = true;
-            player = collision.gameObject;
-        }
-    }
-
-    // 当其他2D碰撞体退出此触发器时调用
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            playerDetectedInTrigger = false;
-            player = null;
-        }
-    }
+    
     #endregion
 
     #region 状态逻辑和辅助方法
