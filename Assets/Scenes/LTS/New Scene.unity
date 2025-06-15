@@ -608,6 +608,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 524732858832516982, guid: 291a30038f7bd274f8c55b5c7f19fbc1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 524732858832516983, guid: 291a30038f7bd274f8c55b5c7f19fbc1,
         type: 3}
       propertyPath: m_RootOrder
@@ -7413,6 +7418,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22df4f0ab446bcc449c2c1641d537127, type: 3}
+--- !u!1001 &400610267
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 962936524613803643, guid: be2490f2b4544df479be02599ed6818c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 62.277065
+      objectReference: {fileID: 0}
+    - target: {fileID: 962936524613803643, guid: be2490f2b4544df479be02599ed6818c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.84502
+      objectReference: {fileID: 0}
+    - target: {fileID: 962936524613803643, guid: be2490f2b4544df479be02599ed6818c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0000019073486
+      objectReference: {fileID: 0}
+    - target: {fileID: 962936524613803643, guid: be2490f2b4544df479be02599ed6818c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 962936524613803643, guid: be2490f2b4544df479be02599ed6818c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 962936524613803643, guid: be2490f2b4544df479be02599ed6818c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 962936524613803643, guid: be2490f2b4544df479be02599ed6818c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 962936524613803643, guid: be2490f2b4544df479be02599ed6818c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 962936524613803643, guid: be2490f2b4544df479be02599ed6818c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 962936524613803643, guid: be2490f2b4544df479be02599ed6818c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6936451675329333012, guid: be2490f2b4544df479be02599ed6818c,
+        type: 3}
+      propertyPath: m_Name
+      value: skeleton
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: be2490f2b4544df479be02599ed6818c, type: 3}
 --- !u!1001 &403204394
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19039,6 +19112,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Zombie1
+      objectReference: {fileID: 0}
+    - target: {fileID: 524732858832516982, guid: 291a30038f7bd274f8c55b5c7f19fbc1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 524732858832516983, guid: 291a30038f7bd274f8c55b5c7f19fbc1,
         type: 3}
@@ -37600,6 +37678,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 524732858832516982, guid: 291a30038f7bd274f8c55b5c7f19fbc1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 524732858832516983, guid: 291a30038f7bd274f8c55b5c7f19fbc1,
         type: 3}
       propertyPath: m_RootOrder
@@ -40549,6 +40632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterData: {fileID: 1489468423}
   healthText: {fileID: 1881455848}
+  healthBarImage: {fileID: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   lowColor: {r: 1, g: 0, b: 0, a: 1}
   lowHealthThreshold: 3
@@ -53009,3 +53093,4 @@ SceneRoots:
   - {fileID: 1887630906}
   - {fileID: 1767541813}
   - {fileID: 1656499993}
+  - {fileID: 400610267}
