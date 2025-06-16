@@ -34,15 +34,10 @@ public class ZombieRunner : Enemy
         rb = GetComponent<Rigidbody2D>();
         hit = GetComponentInChildren<HitEffect>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-
-           
     }
 
     private void Update()
     {
-         // 直接通过名字查找场景中的物体
-        groundCheck = GameObject.Find("GroundCheck").transform;
-        wallCheck = GameObject.Find("WallCheck").transform;
         if (isDead)
             return;
         CheckIsDead();
@@ -95,7 +90,8 @@ public class ZombieRunner : Enemy
 
     private void EnterIdleState()
     {
-
+        movement.Set(0, rb.velocity.y);
+        rb.velocity = movement;
     }
     private void ExitIdleState()
     {
@@ -109,16 +105,14 @@ public class ZombieRunner : Enemy
             // Flip
             Flip();
         }
-        else
-        {
-            // Move
-            movement.Set((isFacingLeft ? -1 : 1) * normalSpeed, rb.velocity.y);
-            rb.velocity = movement;
-        }
+       // Move
+        movement.Set((isFacingLeft ? -1 : 1) * normalSpeed, rb.velocity.y);
+        rb.velocity = movement;
+        Debug.Log("正在处于移动状态");
     }
     private void ExitMovementState()
     {
-
+        Debug.Log("退出移动状态");
     }
 
     private void EnterAttackReadyState()

@@ -290,7 +290,7 @@ public class DragonBehavior : Enemy
             if (currentState != DragonState.Chase)
             {
                 currentState = DragonState.Chase;
-                animator.SetFloat("Speed", chaseSpeed);
+                
                 animator.SetBool("Idle", false);
                 animator.SetBool("Patrol", false);
                 animator.SetBool("Chasing", true);
@@ -393,6 +393,7 @@ public class DragonBehavior : Enemy
 
     void HandleChaseState()
     {
+        animator.SetFloat("Speed", chaseSpeed);
         // 确保不会撞墙或掉下悬崖
         Collider2D wallCollider = Physics2D.OverlapCircle(wallCheck.position, 0.1f, groundLayer);
         Collider2D groundCollider = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
