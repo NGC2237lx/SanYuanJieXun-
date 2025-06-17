@@ -463,7 +463,7 @@ MonoBehaviour:
   isFacingLeft: 1
   attackRange: {fileID: 8417115495303017241}
   groundCheckDistance: 0.9
-  wallCheckDistance: 1
+  wallCheckDistance: 0
   normalSpeed: 1
   madSpeed: 5
   groundCheck: {fileID: 4480965259830037964}
