@@ -3330,7 +3330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 492fcbcc923c0a44bb2cf3b84c7273e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 47
+  health: 10
   isDead: 0
   coin: {fileID: 40670921611593549, guid: 475d0c41765c7014ea6b8656f08b339a, type: 3}
   minSpawnCount: 1

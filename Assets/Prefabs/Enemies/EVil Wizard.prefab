@@ -166,7 +166,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108400899883288915}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35f5d11ede7717a40984903a38eaaebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 10
   isDead: 0
   coin: {fileID: 40670921611593549, guid: 475d0c41765c7014ea6b8656f08b339a, type: 3}
   minSpawnCount: 1
