@@ -127,7 +127,7 @@ public class Skeleton : Enemy // 确保继承自 Enemy
         Detect();
 
         UpdateAnimatorStatement();
-        Debug.Log($"Current Y: {transform.position.y}");
+        //Debug.Log($"Current Y: {transform.position.y}");
     }
 
     // FixedUpdate 以固定的帧率调用，用于物理更新
