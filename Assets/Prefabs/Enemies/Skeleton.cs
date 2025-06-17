@@ -114,10 +114,10 @@ public class Skeleton : Enemy // 确保继承自 Enemy
     public void Update()
     {
          // 确保y位置始终为3
-        if (transform.position.y != 3f)
-        {
-            transform.position = new Vector3(transform.position.x, 3f, transform.position.z);
-        }
+        //if (transform.position.y != 3f)
+        //{
+        //    transform.position = new Vector3(transform.position.x, 3f, transform.position.z);
+        //}
         if (isDead)
         {
             return;
@@ -127,6 +127,7 @@ public class Skeleton : Enemy // 确保继承自 Enemy
         Detect();
 
         UpdateAnimatorStatement();
+        Debug.Log($"Current Y: {transform.position.y}");
     }
 
     // FixedUpdate 以固定的帧率调用，用于物理更新

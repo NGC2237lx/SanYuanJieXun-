@@ -473,7 +473,7 @@ MonoBehaviour:
     m_Bits: 33571072
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 2147502336
+    m_Bits: 2147535104
   currentState: 1
   hurtForce: 200
   deadForce: 400
