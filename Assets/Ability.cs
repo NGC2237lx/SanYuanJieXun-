@@ -119,14 +119,14 @@ public class Ability : MonoBehaviour
     // 学习技能
     private void LearnAbility()
     {
-        if (name == "05_Qi-Blood")
-        {
-            CharacterData cd = FindObjectOfType<CharacterData>();
-            if (cd != null)
-            {
-                cd.SetMaxHealth(10);
-            }
-        }
+        //if (name == "05_Qi-Blood")
+        //{
+        //    CharacterData cd = FindObjectOfType<CharacterData>();
+        //    if (cd != null)
+        //    {
+        //        cd.SetMaxHealth(10);
+        //    }
+        //}
         Debug.Log($"学习技能: {abilityName} (对象: {gameObject.name})");
         isLearned = true;
     }

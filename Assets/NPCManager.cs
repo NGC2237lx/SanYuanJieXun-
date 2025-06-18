@@ -25,20 +25,39 @@ public class NPCManager : MonoBehaviour
 
     private void Awake()
     {
-        // 自动查找UI组件
+        // 第一次尝试查找画布
         dialogueCanvas = GameObject.Find(canvasName);
-        
+
+        // 如果第一次没找到，尝试激活可能被禁用的画布
+        if (dialogueCanvas == null)
+        {
+            // 尝试查找即使被禁用的对象
+            Canvas[] allCanvases = Resources.FindObjectsOfTypeAll<Canvas>();
+            foreach (Canvas canvas in allCanvases)
+            {
+                if (canvas.name == canvasName)
+                {
+                    dialogueCanvas = canvas.gameObject;
+                    dialogueCanvas.SetActive(true); // 激活画布
+                    Debug.Log($"找到并激活了被禁用的画布: {canvasName}");
+                    break;
+                }
+            }
+        }
+
         if (dialogueCanvas != null)
         {
             npcPortrait = dialogueCanvas.transform.Find(npcPortraitName)?.GetComponent<Image>();
             playerPortrait = dialogueCanvas.transform.Find(playerPortraitName)?.GetComponent<Image>();
             dialogueText = dialogueCanvas.transform.Find(dialogueTextName)?.GetComponent<TMP_Text>();
             Debug.Log($"找到画布: {dialogueCanvas.name}");
+
             if (npcPortrait == null || playerPortrait == null || dialogueText == null)
             {
                 Debug.LogError("未能找到所有必需的UI组件，请检查对象名称是否正确");
             }
-            
+
+            // 初始时禁用画布
             dialogueCanvas.SetActive(false);
         }
         else
