@@ -7,7 +7,7 @@ public class Fly : Enemy
 {
     public enum EnemyState
     {
-        IDLE, HURT, DEAD, CHASING
+        IDLE, HURT, DEAD, CHASING, ATTACKING // 新增ATTACKING状态
     }
 
     [SerializeField] private float movementHorizontalSpeed, movementVerticalSpeed;
@@ -16,10 +16,11 @@ public class Fly : Enemy
     [SerializeField] AudioClip enemyDamage;
     [SerializeField] AudioClip enemyDeathSword;
     [SerializeField] private float hurtForce, deadForce;
-    [SerializeField] private float chaseSpeed = 10f; // 突袭速度
-    [SerializeField] private float chaseInterval = 3f; // 突袭间隔时间
-    [SerializeField] private float randomFlyRange = 5f; // 随机飞行范围
-    [SerializeField] private float detectionRange = 10f; // 检测玩家范围
+    [SerializeField] private float chaseSpeed = 10f;
+    [SerializeField] private float chaseInterval = 3f;
+    [SerializeField] private float randomFlyRange = 5f;
+    [SerializeField] private float detectionRange = 10f;
+    [SerializeField] private float attackDuration = 1f; // 攻击动画持续时间
 
     private Transform player;
     private Rigidbody2D rb;
@@ -29,6 +30,8 @@ public class Fly : Enemy
     private float lastChaseTime;
     private Vector2 randomFlyTarget;
     private bool isChasing = false;
+    private bool canAttack = true; // 控制攻击冷却
+    private float attackCooldown = 2f; // 攻击冷却时间
 
     private void Start()
     {
@@ -37,14 +40,14 @@ public class Fly : Enemy
         rb = GetComponent<Rigidbody2D>();
         audioPlayer = GetComponent<AudioSource>();
         hit = GetComponentInChildren<HitEffect>();
-        
+
         // 查找玩家对象
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
             player = playerObj.transform;
         }
-        
+
         // 设置初始随机飞行目标
         SetRandomFlyTarget();
     }
@@ -53,11 +56,11 @@ public class Fly : Enemy
     {
         if (isDead)
             return;
-            
+
         CheckIsDead();
         UpdateDirection();
         UpdateStatements();
-        
+
         // 如果玩家在检测范围内且不在追逐状态，且冷却时间已过，则开始追逐
         if (player != null && !isChasing && Time.time > lastChaseTime + chaseInterval)
         {
@@ -66,6 +69,12 @@ public class Fly : Enemy
             {
                 StartChase();
             }
+        }
+
+        // 攻击冷却处理
+        if (!canAttack && Time.time > lastChaseTime + attackCooldown)
+        {
+            canAttack = true;
         }
     }
 
@@ -104,11 +113,15 @@ public class Fly : Enemy
             case EnemyState.CHASING:
                 EnterChasingState();
                 break;
+            case EnemyState.ATTACKING: // 处理攻击状态
+                EnterAttackingState();
+                break;
         }
     }
 
     public void SwitchState(EnemyState state)
     {
+        // 离开当前状态
         switch (currentState)
         {
             case EnemyState.IDLE:
@@ -123,8 +136,12 @@ public class Fly : Enemy
             case EnemyState.CHASING:
                 ExitChasingState();
                 break;
+            case EnemyState.ATTACKING:
+                ExitAttackingState();
+                break;
         }
 
+        // 进入新状态
         switch (state)
         {
             case EnemyState.IDLE:
@@ -139,6 +156,9 @@ public class Fly : Enemy
             case EnemyState.CHASING:
                 EnterChasingState();
                 break;
+            case EnemyState.ATTACKING: // 新增攻击状态入口
+                EnterAttackingState();
+                break;
         }
 
         currentState = state;
@@ -152,32 +172,66 @@ public class Fly : Enemy
             SetRandomFlyTarget();
         }
     }
-    
+
     private void ExitIdleState()
     {
     }
-    
+
     private void EnterChasingState()
     {
-        // 追逐状态将持续一小段时间
-        Invoke("EndChase", 1f); // 1秒后结束追逐
+        // 追逐状态可以触发攻击
+        if (canAttack && player != null && Vector2.Distance(transform.position, player.position) < chaseInterval)
+        {
+            SwitchState(EnemyState.ATTACKING);
+            return;
+        }
+
+        // 否则继续追逐
+        Invoke("EndChase", 2f);
     }
-    
+
     private void ExitChasingState()
     {
     }
-    
+
+    // 新增攻击状态相关方法
+    private void EnterAttackingState()
+    {
+        // 随机选择攻击动画
+        int attackType = UnityEngine.Random.Range(0, 2); // 0或1
+        animator.SetTrigger(attackType == 0 ? "Attack1" : "Attack2");
+
+        // 设置攻击状态持续时间
+        Invoke("EndAttack", attackDuration);
+    }
+
+    private void ExitAttackingState()
+    {
+        // 攻击结束后设置冷却时间
+        canAttack = false;
+        lastChaseTime = Time.time;
+    }
+
+    private void EndAttack()
+    {
+        // 攻击结束后回到追逐状态
+        if (currentState == EnemyState.ATTACKING && !isDead)
+        {
+            SwitchState(EnemyState.CHASING);
+        }
+    }
+
     private void EnterHurtState()
     {
         hit.PlayHitAnimation();
         audioPlayer.PlayOneShot(enemyDamage);
         SwitchState(EnemyState.IDLE);
     }
-    
+
     private void ExitHurtState()
     {
     }
-    
+
     private void EnterDeadState()
     {
         hit.PlayHitAnimation();
@@ -194,9 +248,9 @@ public class Fly : Enemy
             rb.AddForce(Vector2.right * deadForce);
         }
         animator.SetTrigger("Dead");
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 1f);
     }
-    
+
     private void ExitDeadState()
     {
     }
@@ -214,17 +268,17 @@ public class Fly : Enemy
             case EnemyState.IDLE:
                 // 随机飞行移动
                 Vector2 directionToTarget = (randomFlyTarget - (Vector2)transform.position).normalized;
-                rb.velocity = new Vector2(directionToTarget.x * Mathf.Abs(movementHorizontalSpeed), 
+                rb.velocity = new Vector2(directionToTarget.x * Mathf.Abs(movementHorizontalSpeed),
                                         directionToTarget.y * Mathf.Abs(movementVerticalSpeed));
                 break;
-                
+
             case EnemyState.CHASING:
                 if (player != null)
                 {
                     // 向玩家突进
                     Vector2 chaseDirection = (player.position - transform.position).normalized;
                     rb.velocity = chaseDirection * chaseSpeed;
-                    
+
                     // 根据移动方向翻转图像
                     if (chaseDirection.x > 0 && transform.localScale.x > 0)
                     {
@@ -236,9 +290,17 @@ public class Fly : Enemy
                     }
                 }
                 break;
-                
+
+            case EnemyState.ATTACKING: // 攻击状态移动处理
+                if (player != null)
+                {
+                    // 攻击时继续向玩家移动但速度减慢
+                    Vector2 attackDirection = (player.position - transform.position).normalized;
+                    rb.velocity = attackDirection * (chaseSpeed * 0.5f);
+                }
+                break;
+
             default:
-                // 默认移动方式
                 rb.velocity = new Vector2(movementHorizontalSpeed, movementVerticalSpeed);
                 break;
         }
@@ -298,5 +360,20 @@ public class Fly : Enemy
     public bool GetDeadStatment()
     {
         return isDead;
+    }
+
+    // 调试可视化
+    private void OnDrawGizmosSelected()
+    {
+        // 绘制状态范围
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, randomFlyRange);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+
+        // 绘制攻击范围（新增）
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, chaseInterval); // 攻击触发距离
     }
 }

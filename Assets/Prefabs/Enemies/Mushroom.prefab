@@ -563,7 +563,7 @@ MonoBehaviour:
   wallCheckDistance: 0.5
   player: {fileID: 0}
   attackRange: 2.5
-  comboRange: 2.5
+  comboRange: 1
   attackPoint: {fileID: 6164223874107691751}
   attackRadius: 1.34
   whatIsPlayer:
