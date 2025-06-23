@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class start_button : MonoBehaviour
+public class return_button : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -16,16 +16,9 @@ public class start_button : MonoBehaviour
     {
         
     }
-    public void StartButton()
+ 
+    public void ReturnStart()
     {
-        GameStrat();
-    }
-    private void GameStrat()
-    {
-        SceneManager.LoadScene("start_drama");
-    }
-    public void PlayIntro()
-    {
-        SceneManager.LoadScene("PlayIntro");
+        SceneManager.LoadScene("start_scene");
     }
 }
